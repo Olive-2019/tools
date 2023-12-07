@@ -1,4 +1,4 @@
-# vue-i18n
+# template-i18n
 
 ## 使用方法
 
