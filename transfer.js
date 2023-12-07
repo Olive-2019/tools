@@ -39,6 +39,7 @@ function i18n(AST, id) {
     }
     id = null;
     if ("attrs" in AST && "id" in AST.attrs && AST.attrs.id) id = AST.attrs.id;
+    if ("attrs" in AST && "addin-id" in AST.attrs && AST.attrs["addin-id"]) id = AST.attrs["addin-id"];
     if ("attrs" in AST && AST.attrs) {
         
         for (let key in AST.attrs) {
