@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@vue/compiler-dom": "^3.3.10",
+    "esprima": "^4.0.1",
+    "vue-i18n-translation-parser": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.5"
+  }
+}
