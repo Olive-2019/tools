@@ -1,0 +1,28 @@
+{
+    "TextInput": {
+        "pTIMO789707": {
+            "innerContent": "文本框类型"
+        },
+        "pTIMO720242": {
+            "innerContent": "行数"
+        },
+        "pTIMO788127": {
+            "innerContent": "占位文本"
+        },
+        "pTIMO543284": {
+            "innerContent": "文本框头部图标"
+        },
+        "pTIMO381173": {
+            "innerContent": "文本框尾部图标"
+        },
+        "pTIMO498657": {
+            "innerContent": "最大文本长度"
+        },
+        "divTIMO313733": {
+            "innerContent": "显示字数统计"
+        },
+        "divTIMO017292": {
+            "innerContent": "文本框"
+        }
+    }
+}

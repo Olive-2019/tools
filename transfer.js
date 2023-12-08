@@ -5,7 +5,7 @@ let outputjs = {}
 // 还需要加id的内容，目前写入content
 let needID = []
 // 读取 JavaScript 文件内容
-const fileName = 'SignImg'
+const fileName = 'TreeSelect'
 const filePath = 'input.vue'; // 替换为你的 JavaScript 文件路径
 const code = fs.readFileSync(filePath, 'utf8');
 
@@ -22,7 +22,7 @@ function exchangeToArg(content, id, type) {
     else {
         path = fileName.replace(/[\"]/g, '') + '.' + id.replace(/[\"]/g, '') + '.' + type;
         outputjs[path] = content;
-        return '$t(' + path + ')';
+        return '$t(\'' + path + '\')';
     }
     return null;
 }
@@ -46,7 +46,7 @@ function i18n(AST, id) {
             if (hasChinese(AST.attrs[key])) {
                 let path = exchangeToArg(AST.attrs[key], id, key)
                 let newKey = ':' + key;
-                AST.attrs[newKey] = path;
+                AST.attrs[newKey] = "\"" + path + "\"";
                 delete AST.attrs[key];
             }
         }
