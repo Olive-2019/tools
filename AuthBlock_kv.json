@@ -1,0 +1,46 @@
+{
+    "AuthBlock": {
+        "searchBlockWord": {
+            "placeholder": "输入关键词过滤实体类/关联类"
+        },
+        "switchModelButton": {
+            "innerContent": "进入批量模式"
+        },
+        "ButtonABLK105502": {
+            "innerContent": "进入独立模式"
+        },
+        "RadioABLK282732": {
+            "label": "批量允许"
+        },
+        "RadioABLK746911": {
+            "label": "批量禁止"
+        },
+        "el-tab-paneABLK390030": {
+            "label": "'用户组'"
+        },
+        "searchBlockUserGroupWord": {
+            "placeholder": "输入关键词过滤用户组"
+        },
+        "`ButtonABLK775061$record": {
+            "oid}`": {
+                "title": "更多"
+            }
+        },
+        "el-tab-paneABLK120829": {
+            "label": "'用户'"
+        },
+        "searchBlockUserWord": {
+            "placeholder": "输入关键词过滤用户"
+        },
+        "ButtonABLK583690": {
+            "title": "全部用户",
+            "innerContent": "全部用户"
+        },
+        "divABLK585421": {
+            "innerContent": "仅本组用户"
+        },
+        "pABLK926924": {
+            "innerContent": "用户组："
+        }
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "Login": {
+        "pLogin893676": {
+            "innerContent": "为了给您良好的用户体验"
+        },
+        "pLogin292245": {
+            "innerContent": "建议使用以下版本浏览器"
+        },
+        "pLogin601961": {
+            "innerContent": "谷歌浏览器(Google Chrome)将简约的界面设计与先进的技术相融合，让网络浏览变得更快速安全而且简便。"
+        },
+        "spanLogin039630": {
+            "innerContent": "下载使用"
+        },
+        "pLogin483586": {
+            "innerContent": "Firefox火狐"
+        },
+        "pLogin570065": {
+            "innerContent": "Mozilla Firefox，中文俗称“火狐”（正式缩写为Fx或fx [1]  ），是一个由Mozilla开发的自由及开放源代码的网页浏览器。其使用Gecko排版引擎，支持多种操作系统，如Windows、macOS及GNU/Linux等。"
+        },
+        "spanLogin831891": {
+            "innerContent": "下载使用"
+        },
+        "pLogin503721": {
+            "innerContent": "DWF目前不支持IE！"
+        },
+        "InputLogin204887": {
+            "placeholder": "\\请输入用户名\\"
+        },
+        "InputLogin131428": {
+            "placeholder": "\\请输入密码\\"
+        },
+        "loginButton": {
+            "innerContent": "登录"
+        }
+    }
+}

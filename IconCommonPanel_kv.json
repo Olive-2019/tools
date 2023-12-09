@@ -1,0 +1,19 @@
+{
+    "IconCommonPanel": {
+        "ModalSCICPMO091605": {
+            "title": "设置标签"
+        },
+        "spanSCICPMO000011": {
+            "innerContent": "图标集合"
+        },
+        "pSCICPMO433369": {
+            "innerContent": "通用图标"
+        },
+        "ButtonSCICPMO683675": {
+            "innerContent": "取消"
+        },
+        "ButtonSCICPMO993133": {
+            "innerContent": "确认"
+        }
+    }
+}

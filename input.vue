@@ -1,210 +1,188 @@
 <template>
-  <section v-if="t_preview" :addinName="name" :style="{'width': colWidth}" ref="main" addin-id="sectionTSEMO978545">
-      <van-tree-select
-          class="vant-tree"
-          :height="arg_height"
-          :items="temTreeList"
-          :active-id.sync="args.activeIds"
-          :main-active-index.sync="args.activeIndex"
-       addin-id="van-tree-selectTSEMO681975" />
-      <Spin fix v-if="spinShow" addin-id="SpinTSEMO356055"></Spin>
-
-      <slot name="widget-footer" addin-id="slotTSEMO824509"></slot>
-          <span v-show="t_edit" ref="edit" addin-id="spanTSEMO876250">
-          <EditBox v-if="actEdit" :addinName="name" :widgetAnnotation="widgetAnnotation" :editExtendInfo="editExtendInfo" ref="editbox" v-model="args"
-              :itemValue="itemValue"
-              :attributes="filter_attributes"
-              :router="router"
-              :route="route"
-              :root="root"
-              :query_oprs="query_oprs"
-              :targetclass="itemValue.data.targetClass" addin-id="EditBoxTSEMO190187">
-              <div slot="attribute" addin-id="divTSEMO406349">
-                  <p class="margin1" addin-id="pTSEMO835093">实体类</p>
-                  <Select class="margin1 editbox-targetClass editbox-self-joins-tree" v-model="args.targetClass" filterable clearable @on-change="changeClass" addin-id="SelectTSEMO893383">
-                      <OptionGroup label="实体类" addin-id="OptionGroupTSEMO239783">
-                        <Option v-for="item in all_class" :key="item.id" :value="item.className" :label="item.displayName" addin-id="OptionTSEMO745715">
-                            <span style="font-size: 12px;" addin-id="spanTSEMO145980">{{ item.displayName }}</span>
-                            <span style="float:right;color:#ccc;font-size: 12px;" addin-id="spanTSEMO032671">{{ item.className }}</span>
-                        </Option>
-                      </OptionGroup>
-                      <OptionGroup label="外部实体类" addin-id="OptionGroupTSEMO276923">
-                        <Option v-for="item in allExternalEntities" :key="item.id" :value="item.className" :label="item.displayName" addin-id="OptionTSEMO354679">
-                            <span style="font-size: 12px;" addin-id="spanTSEMO391517">{{ item.displayName }}</span>
-                            <span style="float:right;color:#ccc;font-size: 12px;" addin-id="spanTSEMO228179">{{ item.className }}</span>
-                        </Option>
-                      </OptionGroup>
-                  </Select>
-                  <p class="margin1" addin-id="pTSEMO519504">关联属性</p>
-                  <Select v-if="reloadAttr" ref="labelAttrSelect" class="margin1 editbox-self-joins-tree" v-model="args.relationAttr" filterable clearable addin-id="SelectTSEMO065279">
-                      <OptionGroup label="系统属性" addin-id="OptionGroupTSEMO211312">
-                      <Option v-for="(attr, index) in targetClassAttributes.sysAttr" :value="attr.attributeName"
-                              :key="index || ''" :label="attr.displayName" addin-id="OptionTSEMO214909"></Option>
-                      </OptionGroup>
-                      <OptionGroup label="类属性" addin-id="OptionGroupTSEMO298787">
-                      <Option v-for="(attr, index) in targetClassAttributes.selfAttr" :value="attr.attributeName"
-                              :key="index || ''" :label="attr.displayName" addin-id="OptionTSEMO578715"></Option>
-                      </OptionGroup>
-                  </Select>
-                  <p class="margin1" addin-id="pTSEMO431404">被关联属性</p>
-                  <Select v-if="reloadAttr" ref="labelAttrSelect" class="margin1 editbox-self-joins-tree" v-model="args.associatedAttr" filterable clearable addin-id="SelectTSEMO076667">
-                      <OptionGroup label="系统属性" addin-id="OptionGroupTSEMO842577">
-                      <Option v-for="(attr, index) in associatedAttributes.sysAttr" :value="attr.attributeName"
-                              :key="index || ''" :label="attr.displayName" addin-id="OptionTSEMO672620"></Option>
-                      </OptionGroup>
-                      <OptionGroup label="类属性" addin-id="OptionGroupTSEMO098717">
-                      <Option v-for="(attr, index) in associatedAttributes.selfAttr" :value="attr.attributeName"
-                              :key="index || ''" :label="attr.displayName" addin-id="OptionTSEMO177986"></Option>
-                      </OptionGroup>
-                  </Select>
-                  <p class="margin1" addin-id="pTSEMO757010">根节点标签</p>
-                  <Input class="margin1" type="textarea" :autosize="true" v-model="args.rootLabel" @on-focus="setLable(1)"  addin-id="InputTSEMO294300" />
-                  <p class="margin1" addin-id="pTSEMO007093">子孙节点标签</p>
-                  <Input class="margin1" type="textarea" :autosize="true" v-model="args.childrenLabel" @on-focus="setLable(2)"  addin-id="InputTSEMO502697" />
-                  <p class="margin1" addin-id="pTSEMO871178">根节点为空时标签</p>
-                  <Input class="margin1" v-model="args.rootEmptyLabel"  addin-id="InputTSEMO237381" />
-                  <p class="margin1" addin-id="pTSEMO872627">子节点为空时标签</p>
-                  <Input class="margin1" v-model="args.childrenEmptyLabel"  addin-id="InputTSEMO180838" />
-                  <p class="margin1" addin-id="pTSEMO719185">根节点查询条件</p>
-                  <Input class="margin1" type="textarea" :autosize="true" v-model="args.rootQuery" @on-focus="setLable(3)"  addin-id="InputTSEMO010669" />
-                  <p class="margin1" addin-id="pTSEMO015879">子孙节点查询条件</p>
-                  <Input class="margin1" type="textarea" :autosize="true" v-model="args.childrenQuery" @on-focus="setLable(4)" addin-id="InputTSEMO904675" />
-
-                  <div class="margin1" style="margin: 10px 0 10px 0" addin-id="divTSEMO538125">
-                      多选
-                      <i-switch style="float: right" v-model="args.multiSwitch" @on-change="changeMulti"  addin-id="i-switchTSEMO071246" />
+    <div id="divABLK007259">
+      <Card :bordered="false" dis-hover id="CardABLK899810">
+        <Row :gutter="8" id="RowABLK980675">
+          <Col span="9" class="auth-tree" id="ColABLK641739">
+            <div style="height: 30px; text-align: left" id="divABLK317589">
+              当前选中项：{{currentRow.id === undefined ? '（无）' : currentRow.attributeName ? `类 ${currentRow.className} - 属性 ${currentRow.attributeName}` : `类 ${currentRow.className}` }}
+            </div>
+            <Input
+              v-model="keyword"
+              id="searchBlockWord"
+              icon="md-search"
+              placeholder="输入关键词过滤实体类/关联类"
+            >
+            </Input>
+            <a-table
+              v-if="refreshAtable"
+              id="blockClassTable"
+              size="small"
+              :indentSize="8"
+              childrenColumnName="attributes"
+              :columns="classColumns"
+              :dataSource="filteredClasses"
+              :rowSelection="classRowSelection"
+              @expand="onClassExpand"
+  
+            >
+              <span slot="engName" slot-scope="text, record" id="spanABK541326">
+                <span :title="record.engName" style="overflow: hidden;text-overflow: ellipsis;display: inline-block;float: right;width: 80%;white-space: nowrap;word-break: break-all;" id="spanABK355606">
+                  {{ record.engName }}
+                </span>
+              </span>
+              <span slot="displayName" slot-scope="text, record" id="spanABK129996">
+                <span :title="record.displayName" style="overflow: hidden;text-overflow: ellipsis;display: inline-block;float: left;width: 80%;white-space: nowrap;word-break: break-all;" id="spanABK691879">
+                  {{ record.displayName }}
+                </span>
+              </span>
+            </a-table>
+          </Col>
+          <Col span="15" class="auth-tree" v-if="currentRow.id !== undefined" id="ColABLK174512">
+            <div v-if="!batchMode" style="height: 30px; text-align: left; width:70%;" id="divABLK737188">
+              <Button id="switchModelButton" type="primary" size="small" @click="toggleBatchMode">进入批量模式</Button>
+            </div>
+            <div v-else style="height: 30px; text-align: left;width:70%;" id="divABLK101838">
+              <Button type="primary" size="small" @click="toggleBatchMode" style="margin-right: 16px" id="ButtonABLK105502">进入独立模式</Button>
+              <RadioGroup v-model="batchActionState" id="batchRadio">
+                <Radio label="批量允许" id="RadioABLK282732"></Radio>
+                <Radio label="批量禁止" id="RadioABLK746911"></Radio>
+              </RadioGroup>
+              <Button v-for="(value, key) in actions" :key="key" :id="batchButtonId(key)" @click="batchAction(key)"
+                      style="margin-left: 5px;" size="small"
+                      :type="batchActionState === '批量允许' ? 'success' : 'error'"
+                      :disabled="selectedGroupKeys.length + selectedUserKeys.length === 0"
+              >
+                {{value}}
+              </Button>
+            </div>
+  <!--          <div style="height: 30px;float: right">-->
+  <!--            <span>是否显示用户 </span>-->
+  <!--          <i-switch v-model="showUser" @on-change="changeShowUser" :loading="showUserLoading" />-->
+  <!--          </i-switch>-->
+  <!--          </div>-->
+            <el-tabs v-model="userTabValue" type="card" @tab-click="handleTabChange" id="el-tabsABLK756312">
+              <el-tab-pane
+                :key="'1'"
+                :label="'用户组'"
+                :name="'1'"
+               id="el-tab-paneABLK390030">
+                <Input
+                  v-model="keywordUserGroup"
+                  id="searchBlockUserGroupWord"
+                  search
+                  placeholder="输入关键词过滤用户组"
+                  @on-change="_handleSearchGroup"
+                >
+                </Input>
+                <a-table
+                  ref="userGroupTable"
+                  id="blockUserGroupTable"
+                  size="small"
+                  :indentSize="8"
+                  :loading="groupTableLoading"
+                  :pagination="groupPagination"
+                  :expandedRowKeys="userGroupRowKeys"
+                  :columns="userGroupColumns"
+                  :dataSource="userGroups"
+                  :rowSelection="userGroupRowSelection"
+                  :customRow="userGroupCustomRow"
+                  @change="handlePageChange"
+                  @expand="onUserGroupExpand"
+                >
+                  <div slot="name" slot-scope="text, record" class="a-table-slot-div" style="float: right" id="divABK699343">
+                    <Icon :type="'md-people'" id="IconABK455918"></Icon>
+                    <span class="a-table-slot-span" style="float: right" :title="record.name" id="spanABK897996">
+                      {{ record.name }}
+                    </span>
                   </div>
-                  <div class="margin1" style="padding: 0 8px;margin: 10px 0;" addin-id="divTSEMO626067">
-                    返回特定属性
-                    <i-switch style="float: right" v-model="args.openReturnAttr" addin-id="i-switchTSEMO891797" />
-                    <Row class="margin1" v-show="args.openReturnAttr" addin-id="RowTSEMO656158">
-                      <Col span="24" style="text-align: center" addin-id="ColTSEMO901491">
-                        <Button
-                          type="primary"
-                          style="text-align: center; width: 100%"
-                          @click="openChooseReturnAttr"
-                         addin-id="ButtonTSEMO064218">选择返回属性</Button>
-                      </Col>
-                    </Row>
+                  <div slot="displayName" slot-scope="text, record" class="a-table-slot-div" id="divABK026551">
+                    <span class="a-table-slot-span" :title="record.displayName" id="spanABK761487">
+                      {{ record.displayName }}
+                    </span>
                   </div>
-                  <Row class="margin1" addin-id="RowTSEMO410178">
-                      <Col span="10" addin-id="ColTSEMO117055">
-                          <Button type="primary" @click="updateTree" addin-id="ButtonTSEMO126440">更新预览</Button>
-                      </Col>
-                  </Row>
-              </div>
-              <div slot="layout" addin-id="divTSEMO972435">
-              </div>
-              <div slot="operation" addin-id="divTSEMO049773">
-              </div>
-          </EditBox>
-      </span>
-
-      <!-- 设置节点标签弹窗 -->
-      <Modal
-          v-model="lableModal"
-          width="700"
-          title="设置标签"
-           addin-id="ModalTSEMO689993">
-          <Row class="lableTxt" addin-id="RowTSEMO959842">
-              <Col span="4" addin-id="ColTSEMO744369">
-                  <span addin-id="spanTSEMO453122">{{ editLabelSpan }}</span>
-              </Col>
-              <Col span="18" offset="1" addin-id="ColTSEMO028785">
-                  <Input v-model="selfRootLable" type="textarea" :autosize="true" @on-change="mapAttr" addin-id="InputTSEMO655908" />
-              </Col>
-          </Row>
-          <p class="attrTitle" v-show="!isChildLable" addin-id="pTSEMO964600">实体类属性:</p>
-          <div class="attrBox" v-show="!isChildLable" addin-id="divTSEMO705204">
-              <CheckboxGroup v-model="args.selected_entities_attributes" @on-change="clickAttr" addin-id="CheckboxGroupTSEMO864687">
-                  <Collapse simple v-model="selfGroup" addin-id="CollapseTSEMO565964">
-                      <Panel name="1" addin-id="PanelTSEMO823954">
-                          系统属性
-                          <div slot="content" addin-id="divTSEMO403907">
-                              <Checkbox
-                                  v-for="item in targetClassAttributes.sysAttr"
-                                  :key="item.id"
-                                  :label="`obj.${item.attributeName}`"
-                                  class="commonLabel"
-                                   addin-id="CheckboxTSEMO337996">{{ item.displayName }}
-                              </Checkbox>
-                          </div>
-                      </Panel>
-                      <Panel name="2" addin-id="PanelTSEMO977537">
-                          类属性
-                          <div slot="content" addin-id="divTSEMO247837">
-                              <Checkbox
-                                  v-for="item in targetClassAttributes.selfAttr"
-                                  :key="item.id"
-                                  :label="`obj.${item.attributeName}`"
-                                  class="commonLabel"
-                                   addin-id="CheckboxTSEMO780025">{{ item.displayName }}
-                              </Checkbox>
-                          </div>
-                      </Panel>
-                  </Collapse>
-              </CheckboxGroup>
-          </div>
-          <p class="attrTitle" v-show="isChildLable" addin-id="pTSEMO459660">关联实体类属性:</p>
-          <div class="attrBox" v-show="isChildLable" addin-id="divTSEMO170083">
-              <CheckboxGroup v-model="args.selected_relation_entities_attributes" @on-change="clickRelationEntitiesAttr" addin-id="CheckboxGroupTSEMO825444">
-                  <Collapse simple v-model="selfENGroup" addin-id="CollapseTSEMO070485">
-                      <Panel name="1" addin-id="PanelTSEMO026250">
-                          关联实体类系统属性
-                          <div slot="content" addin-id="divTSEMO764828">
-                              <Checkbox
-                                  v-for="item in targetClassAttributes.sysAttr"
-                                  :key="item.id"
-                                  :label="`obj.${item.attributeName}`"
-                                  class="commonLabel"
-                                   addin-id="CheckboxTSEMO182282">{{ item.displayName }}
-                              </Checkbox>
-                          </div>
-                      </Panel>
-                      <Panel name="2" addin-id="PanelTSEMO996729">
-                          关联实体类类属性
-                          <div slot="content" addin-id="divTSEMO600075">
-                              <Checkbox
-                                  v-for="item in targetClassAttributes.selfAttr"
-                                  :key="item.id"
-                                  :label="`obj.${item.attributeName}`"
-                                  class="commonLabel"
-                                   addin-id="CheckboxTSEMO369684">{{ item.displayName }}
-                              </Checkbox>
-                          </div>
-                      </Panel>
-                  </Collapse>
-              </CheckboxGroup>
-          </div>
-          <div slot="footer" addin-id="divTSEMO520672">
-              <Button type="text" @click="lableModal = false" addin-id="ButtonTSEMO170088">取消</Button>
-              <Button type="primary" @click="confirmLable" addin-id="ButtonTSEMO372204">确认</Button>
-          </div>
-      </Modal>
-      <!-- 设置节点标签弹窗ending -->
-
-      <!-- 根子节点过滤条件组件  -->
-      <FilterQueryCommonModal
-          v-if="actEdit" :addinName="name"
-          :args="args"
-          :itemValue="itemValue"
-          :refClass="`${args.targetClass}&e`"
-          :targetClass="itemValue.data.targetClass"
-          ref="filterQuery_modal"
-          :root="root"
-          :store="store"
-          @generatorFilterQuery="getFilterQuery" addin-id="FilterQueryCommonModalTSEMO155189">
-      </FilterQueryCommonModal>
-
-  </section>
-  <section v-else :addinName="name" addin-id="sectionTSEMO942948">
-      <span style="text-align:center" addin-id="spanTSEMO877324">
-          <div class="form-addin-icon" addin-id="divTSEMO471098">
-              <i class="iconfont" addin-id="iTSEMO155889">&#xe6c8;</i>
-          </div>
-          <div class="form-addin-name" addin-id="divTSEMO981618">
-              树选择
-          </div>
-      </span>
-  </section>
-</template>
+                  <div slot="parent" slot-scope="text, record" class="a-table-slot-div" id="divABK100320">
+                    <span class="a-table-slot-span" :title="record.parent" id="spanABK718127">
+                      {{ record.parent }}
+                    </span>
+                  </div>
+                  <div slot="action" slot-scope="text, record" class="a-table-action-slot-div" id="divABK897841">
+                    <Button  v-for="(value, key) in actions" :key="key" size="small" :id="`ButtonABLK775062${record.oid}${key}`"
+                             v-if="record.actions && record.disabled"
+                             :type="record.actions[key] ? 'success' : 'default'"
+                             :disabled="record.disabled[key]"
+                             @click="toggleAction(record.actions[key], `${record.key}_${key}`, record)" style="margin-left: 5px;">
+                      {{value}}
+                    </Button>
+                  </div>
+                  <span slot="more" slot-scope="text, record" id="spanABK311095">
+                    <Button type="default" title="更多" :size="'small'" :id="`ButtonABLK775061${record.oid}`" icon="md-more" :disabled="record.childrenCount == 0 || (record.childrenCount > 0 && record.childrenCount <= 10) || (record.childrenCount  id="=ABK204511"> 10 && record.childrenCount == record.children.length)" style="margin-right: 8px;" @click.stop="childMore(record)"></Button>
+                  </span>
+                </a-table>
+              </el-tab-pane>
+              <el-tab-pane
+                :key="'2'"
+                :label="'用户'"
+                :name="'2'"
+               id="el-tab-paneABLK120829">
+                <Input
+                  v-model="keywordUser"
+                  id="searchBlockUserWord"
+                  search
+                  style="width:45%;"
+                  placeholder="输入关键词过滤用户"
+                  @on-change="_handleSearchUser"
+                >
+                </Input>
+                <div style="margin: 0% 0 0 1%;height: 32px;line-height: 32px;float: right;" id="divABLK683555">
+                  <Button type="default" title="全部用户" :size="'small'" @click="freshAllUser" id="ButtonABLK583690">全部用户</Button>
+                </div>
+                <div style="width: 22%;margin: 0% 0 0 1%;float: right;height: 32px;line-height: 32px;" id="divABLK585421">
+                  仅本组用户
+                  <i-switch v-model="showUserInGroup" @on-change="changeShowUserInGroup" id="i-switchABLK357579" />
+                </div>
+                <p style="width: 15%;height: 32px;line-height: 32px;float: right;margin: 0% 0 0 1%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-break: break-all;" :title="currentGroupRow.name" id="pABLK926924">用户组：{{ currentGroupRow.name }}</p>
+                <a-table
+                  ref="userTable"
+                  id="blockUserTable"
+                  size="small"
+                  :loading="userTableLoading"
+                  :indentSize="8"
+                  :pagination="userPagination"
+                  :columns="userColumns"
+                  :dataSource="users"
+                  :rowSelection="userRowSelection"
+                  @change="handleUserPageChange"
+                >
+                  <div slot="name" slot-scope="text, record" class="a-table-user-slot-div" style="float: left" id="divABK724775">
+                    <Icon :type="'md-person'" id="IconABK075955"></Icon>
+                    <span class="a-table-slot-span" style="float: right" :title="record.name"  id="spanABK600154">
+                      {{ record.name }}
+                    </span>
+                  </div>
+                  <div slot="displayName" slot-scope="text, record" class="a-table-user-slot-div" id="divABK269526">
+                    <span class="a-table-slot-span" :title="record.displayName" id="spanABK801834">
+                      {{ record.displayName }}
+                    </span>
+                  </div>
+                  <div slot="parent" slot-scope="text, record" class="a-table-user-slot-div" id="divABK236250">
+                    <span class="a-table-slot-span" :title="record.parent" id="spanABK657875">
+                      {{ record.parent }}
+                    </span>
+                  </div>
+                  <span slot="action" slot-scope="text, record, index" class="a-table-user-action-slot-div" id="spanABK183178">
+                    <Button  v-for="(value, key) in actions" :key="key" size="small" :id="`ButtonABLK583295${index}${key}`"
+                             v-if="record.actions && record.disabled"
+                             :type="record.actions[key] ? 'success' : 'default'"
+                             :disabled="record.disabled[key]"
+                             @click="toggleAction(record.actions[key], `${record.key}_${key}`)" style="margin-left: 5px;">
+                      {{value}}
+                    </Button>
+                  </span>
+                </a-table>
+              </el-tab-pane>
+            </el-tabs>
+          </Col>
+        </Row>
+      </Card>
+    </div>
+  </template>

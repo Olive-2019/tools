@@ -5,7 +5,7 @@ let outputjs = {}
 // 还需要加id的内容，目前写入content
 let needID = []
 // 读取 JavaScript 文件内容
-const fileName = 'TreeSelect'
+const fileName = 'AuthBrief'
 const filePath = 'input.vue'; // 替换为你的 JavaScript 文件路径
 const code = fs.readFileSync(filePath, 'utf8');
 
