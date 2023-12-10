@@ -5,7 +5,7 @@ let outputjs = {}
 // 还需要加id的内容，目前写入content
 let needID = []
 // 读取 JavaScript 文件内容
-const fileName = 'AuthBrief'
+const fileName = 'ExternalEntityModeling'
 const filePath = 'input.vue'; // 替换为你的 JavaScript 文件路径
 const code = fs.readFileSync(filePath, 'utf8');
 
@@ -100,7 +100,7 @@ i18n(AST[0]);
 const vueContent = stringify(AST);
 const kvContent = JSON.stringify(outputjs);
 const needIDContent = JSON.stringify(needID);
-const formattedJSON = formatStringToJSON(kvContent);
+const formattedJSON =  formatStringToJSON(kvContent);
 const jsonContent = JSON.stringify(formattedJSON);
 outputFile(vueContent, fileName + '_tansfer.vue');
 outputFile(needIDContent, fileName + '_stillNeedIDContent.json');
